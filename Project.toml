@@ -1,0 +1,16 @@
+name = "DTSSignals"
+uuid = "ffd6acfe-cf79-472d-9fe0-516ab33e97a0"
+authors = ["Francisco J. Valverde <francisco.valverde@urjc.es>"]
+version = "0.2.0"
+
+[deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+DSP = "717857b8-e6f2-59f4-9121-6e50c889abd2"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
+
+[compat]
+CairoMakie = "0.13.2"
+DSP = "0.8.2"
+DataFrames = "1.7.0"
+Reexport = "1.2.2"
