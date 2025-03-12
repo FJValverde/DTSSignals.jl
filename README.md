@@ -6,4 +6,4 @@ Signals are "parallel" vectors of time indices and values, possibly with a sampl
 
 There are many ways this could be used for your classes in Discrete Time Signal Processing. 
 
-
+This project is licensed under the terms of the MIT license.
