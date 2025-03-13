@@ -6,6 +6,13 @@ Signals are "parallel" vectors of time indices and values, possibly with a sampl
 
 There are many ways this could be used for your classes in Discrete Time Signal Processing. 
 
+Since this is still being developed, you should add it as a developing Package:
+- go to your project's package manager.
+- issue > develop https://github.com/FJValverde/DTSSignals.jl
+- go back to julia and issue: julia> using DTSSignals
+
+There are documentation pages as linked from below. 
+
 This project is licensed under the terms of the MIT license.
 
 [![Build status (Github Actions)](https://github.com/sylvaticus/MyAwesomePackage.jl/workflows/CI/badge.svg)](https://github.com/FJValverde/DTSSignals.jl/actions)
