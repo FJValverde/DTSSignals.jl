@@ -31,6 +31,7 @@ export
     length, # The length of a signal
     visualize!, #a function to visualize signals. 
     isreal, #A predicate to check if a signal is real
+    sample,
     # Utilities for signals
     sinusoid, # A primitive to generate a sinusoid in continuous time. 
     trim # A function to trim zeros out of pairs of time indices and value sequences 

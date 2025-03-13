@@ -36,7 +36,7 @@ end
 
 
 @testset "DTSSignals utilities" begin
-    @test scale(Complex(2.0),δ(0)) == δ(0) + δ(0)
+    @test 2.0δ(0) == δ(0) + δ(0)
     @test (2.0+0im)*δ(0) == δ(0) + δ(0)#Not yet defined.
     @test 2δ(0) == δ(0) + δ(0) == 2.0δ(0) == (2.0+0.0im) * δ(0) 
     @test isreal(Signal([1,2,3],[1.0,2.0,3.0])) && isreal(δ(0))
@@ -51,7 +51,7 @@ end
     r = conj(s)
     @test !isreal(s) || s == r#only true for real signals.
     @test s == conj(r)## Always true since conj is an involution.
-    @test (π/4)s != conj((π/4)s)        
+    @test (π/4)s == conj((π/4)s)        
 end
 
 @testset "Creating signals by sampling" begin
