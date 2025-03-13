@@ -1,7 +1,7 @@
 name = "DTSSignals"
 uuid = "ffd6acfe-cf79-472d-9fe0-516ab33e97a0"
 authors = ["Francisco J. Valverde <francisco.valverde@urjc.es>"]
-version = "0.1.0"
+version = "0.3.0"
 
 [deps]
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
