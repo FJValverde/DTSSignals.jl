@@ -57,6 +57,32 @@ function sinusoid(A::Real, f::Real, φ::Real, t::Real)
     return A*cos(2π*f*t + φ)
 end
 
+## FVA: Don't attempt to overload generics for union types just yet! 
+#=
+const Option{T} = Union{Some{T}, Nothing} where T
+#import Base:(==)
+"""
+    ==(x::Union{T,Nothing}, y::Union{T,Nothing}) → Bool
+
+A primitive to check for approximation in Union of some.
+```julia
+using Test
+x::Option{Float64} = nothing
+y::Option{Float64} = nothing
+@test x == y
+x2::Option{Float64} = 1e3
+y2::Option{Float64} = 1e3
+@test x2 == y2
+@test Some(1.0) != Some(1.0 + 1e-10)
+@test Some(1.0) == Some(0.9999999999999999)
+```
+"""
+function (==)(x::Option{T}, y::Option{T}) where T
+    isnothing(x) && isnothing(y) || 
+        !isnothing(x) && !isnothing(y) && (something(x) ≈ something(y)) || 
+        false 
+end
+
 """
     ==(x::Union{T,Nothing}, y::Union{T,Nothing}) → Bool
 
@@ -72,6 +98,25 @@ y::Union{Float64,Nothing} = 1e3
 ```
 """
 function ==(x::Union{T,Nothing}, y::Union{T,Nothing}) where T
-    isnothing(x) && isnothing(y) || x ≈ y
+    isnothing(x) && isnothing(y) || 
+        !isnothing(x) && !isnothing(y) && (x ≈ y) || 
+        false 
 end
+=#
 
+"""
+    sample(f::Function, fs::AbstractFloat, N::Integer) → Signal
+
+A function to sample a time function [f] at a given sampling frequency 
+[fs] for [N] samples.
+```julia
+using Test
+x = sample(t -> sin(2π*t), 1.0, 10)
+@test length(x.n) == 10
+@test x.v  == collect(0:9)
+@test x.v ≈ sin.(2π*collect(0:9))
+```
+"""
+function sample(f::Function, fs::AbstractFloat, N::Integer)
+    return Signal(collect(0:N-1), f.(collect(0:N-1)/fs); fs=fs)
+end

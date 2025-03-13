@@ -117,6 +117,21 @@ function visualise!(x::Signal; full=false, polar=true)
     end
 end
 
+import Base:isreal
+"""
+    isreal(x::Signal) → Bool
+
+A predicate to check if a signal is real.
+```julia
+using Test
+@test isreal(Signal([1,2,3],[1.0,2.0,3.0])) && isreal(δ(0))
+@test !isreal(Signal([1,2,3],[1.0,2.0,3.0im]))
+```
+"""
+function isreal(x::Signal)
+    return isreal(x.v)
+end
+
 """
     δ(τ::Integer) → Signal
 
@@ -136,6 +151,14 @@ import Base:conj
     conj(x::Signal) → Signal
 
 A function to generate the conjugate of a signal.
+```julia
+s = δ(0)
+r = conj(s)
+using Test
+@test !isreal(s.v) || x == r#only true for real signals.
+@test s == conj(r)## Always true since conj is an involution.
+@test (π/4)s != conj((π/4)s)
+```
 """
 function conj(x::Signal)::Signal
     return(Signal(x.n, conj.(x.v); fs=x.fs))
@@ -167,7 +190,8 @@ x = δ(0)
 y = δ(5)
 w = x + y
 x = add(δ(4), w)
-@assert w == δ(0) + δ(5)
+using Test
+@test w == δ(0) + δ(5)
 ```
 """
 function +(x::Signal, y::Signal)::Signal

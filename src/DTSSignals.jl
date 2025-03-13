@@ -6,10 +6,10 @@
 """
 module DTSSignals
 
-using Reexport
+#using Reexport
 #@reexport using DataFrames, CairoMakie
 
-import Base: *, +, conj, ==, real, imag, abs, angle, length
+import Base: *, +, conj, (==), real, imag, abs, angle, length
 
 export
     ## Main type and operations for signals.
@@ -30,6 +30,7 @@ export
     angle,#A function to extract the angle of a signal
     length, # The length of a signal
     visualize!, #a function to visualize signals. 
+    isreal, #A predicate to check if a signal is real
     # Utilities for signals
     sinusoid, # A primitive to generate a sinusoid in continuous time. 
     trim # A function to trim zeros out of pairs of time indices and value sequences 
