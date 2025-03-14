@@ -16,9 +16,11 @@ export
     Signal,#A type and constructor for signals.
     *, #dot product of signals, scalar product with a signal (inline)
     +, # addition of signals (inline)
+    ∘, # \circ, hadamard (entrywise) product of signals
+
     conj, #signal conjugate
     shift, # a function to shift a signal. 
-    convolve, 
+    conv, ⊛, #\circledast convolution of signals 
     # Primitive signals
     zero, #A zero signal
     δ, # A primitive to generate a delta (unit for convolution)

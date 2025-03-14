@@ -289,3 +289,25 @@ function *(x::Signal, y::Signal)::Complex
     return reduce(+, conj(x.Value[common]) .* y.Value[common]; init=0+0im)
 end
  =#
+
+import Base:∘#\circ
+ """
+    ∘(x::Signal, y::Signal) → Signal
+
+Hadamard product of two signals, for windowing, etc.
+```julia
+xs = δ(0) + δ(4) + δ(5)
+ys = δ(0) + 2δ(4)
+@test xs ∘ ys == δ(0) + 2δ(4)
+```
+"""
+function Base.:∘(x::Signal, y::Signal)::Signal
+    x.fs == y.fs || throw(ArgumentError("Signals must have the same sampling frequency"))
+    xdict = Dict(zip(x.n, x.v))
+    ydict = Dict(zip(y.n, y.v))
+    merged = mergewith(*, xdict, ydict)
+    # We need to sort the keys to have a consistent time index. 
+    n = collect(keys(merged))
+    v = collect(values(merged))
+    return(Signal(n,v; fs=x.fs))
+end

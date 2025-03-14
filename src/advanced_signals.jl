@@ -37,6 +37,7 @@ A primitive to observe the lenth of a signal
 """
 length(x::Signal) = length(x.n)
 
+#import Base:⊛#Not in Base!
 """
       convolve(x::Signal, y::Signal)::Signal
 
@@ -45,10 +46,10 @@ Example:
 ```julia
 x = δ(2)
 y = δ(5)
-@assert conv(x,y) == δ(7)
+@assert conv(x,y) == δ(7) == x ⊛ y
 ```
 """ 
-function conv(x::Signal, y::Signal)::Signal
+function ⊛(x::Signal, y::Signal)::Signal
       x.fs == y.fs || throw(ArgumentError("The signals must have the same sampling frequency."))
       lx = length(x); ly = length(y)
       if (lx == 0 || ly == 0)
@@ -60,6 +61,7 @@ function conv(x::Signal, y::Signal)::Signal
                   )#will fail most properties
       end
 end
+conv(x::Signal, y::Signal) = x ⊛ y
 
 """
 Another implementation, using matrix multiplication, unexported.
