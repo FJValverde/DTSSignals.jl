@@ -6,8 +6,7 @@
 """
 module DTSSignals
 
-#using Reexport
-#@reexport using DataFrames, CairoMakie
+using CairoMakie
 
 import Base: *, +, conj, (==), real, imag, abs, angle, length
 
@@ -42,4 +41,5 @@ include("utilities.jl")
 include("proto_signals.jl")
 include("advanced_signals.jl")
 
+include("sampledSpectra.jl")
 end# Module Signals
